@@ -36,3 +36,6 @@ Route::put('/funcionario/{funcionario}' , [FuncionarioController::class,'update'
 */
 
 Route::resource('funcionario',FuncionarioController::class);
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
