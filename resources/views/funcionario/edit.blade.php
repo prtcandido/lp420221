@@ -1,16 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Bootstrap -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
-
-    <title>Document</title>
-</head>
-<body>
+@extends('master')
+@section('corpo')
     @foreach( $errors->all() as $e)
         {{ $e }} <br/>
     @endforeach
@@ -40,5 +29,4 @@
     </div>
     </div>
     <a href="/funcionario" class="btn btn-primary">Voltar</a>
-</body>
-</html>
+@endsection

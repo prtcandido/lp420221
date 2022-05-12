@@ -8,8 +8,15 @@ use App\Models\Funcionario;
 
 use App\Http\Requests\FuncionarioRequest;
 
+use App\Http\Resources\Funcionario as FuncionarioResource;
+
 class FuncionarioController extends Controller
 {
+    //public function __construct(Request $request)
+    //{
+    //    $this->middleware('auth',[ 'except'=>['index','show'] ]);
+    //}
+
     /**
      * Display a listing of the resource.
      *
@@ -103,5 +110,45 @@ class FuncionarioController extends Controller
         $funcionario->delete();
 
         return redirect('/funcionario');
+    }
+
+    public function apiFind(Funcionario $funcionario)
+    {
+        return new FuncionarioResource($funcionario);
+    }
+
+    public function apiAll()
+    {
+        return FuncionarioResource::collection(Funcionario::all());
+    }
+
+    public function apiStore(Request $request)
+    {
+        try{
+            $funcionario = Funcionario::create($request->all());
+            return response()->json($funcionario,201);
+        } catch (\Exception $ex) {
+            return response()->json(null,400);
+        } 
+    }
+
+    public function apiUpdate(Request $request,Funcionario $funcionario)
+    {
+        try{
+            $funcionario->update($request->all());
+            return response()->json($funcionario,200);
+        } catch (\Exception $ex) {
+            return response()->json(null,400);
+        } 
+    }
+
+    public function apiDelete(Funcionario $funcionario)
+    {
+        try{
+            $funcionario->delete();
+            return response()->json(null,204);
+        } catch (\Exception $ex) {
+            return response()->json(null,400);
+        } 
     }
 }
