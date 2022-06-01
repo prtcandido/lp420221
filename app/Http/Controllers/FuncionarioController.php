@@ -112,16 +112,21 @@ class FuncionarioController extends Controller
         return redirect('/funcionario');
     }
 
+    // ---- Função de API
+
+    // GET + /api/funcionario/3  (routes/api.php)
     public function apiFind(Funcionario $funcionario)
     {
         return new FuncionarioResource($funcionario);
     }
 
+    // GET + /api/funcionario
     public function apiAll()
     {
         return FuncionarioResource::collection(Funcionario::all());
     }
 
+    // POST + /api/funcionario + JSON com os dados
     public function apiStore(Request $request)
     {
         try{
@@ -132,6 +137,7 @@ class FuncionarioController extends Controller
         } 
     }
 
+    // PUT + /api/funcionario/3 + JSON com novos dados
     public function apiUpdate(Request $request,Funcionario $funcionario)
     {
         try{
@@ -142,6 +148,7 @@ class FuncionarioController extends Controller
         } 
     }
 
+    // DELETE + /api/funcionario/3
     public function apiDelete(Funcionario $funcionario)
     {
         try{
